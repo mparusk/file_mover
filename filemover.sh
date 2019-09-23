@@ -7,14 +7,15 @@
 #in the end print all files (should probably be 144)
 
 mkdir ./extracted 
-#echo $(ls)
+#echo $(ls):
 counter=0
-
+directories_found=$(ls -dq *drive* | wc -l)
+echo $directories_found
 #why doesnt /~/Downloads/extracter/ work?
 for directory in ./*
 do	
 	#echo 'outer loop'
-	echo $directory
+	#echo $directory
 	if [[ $directory =~ .*drive.* ]]
 	then
 		for file in ./$directory/*
@@ -26,7 +27,7 @@ do
 
 	#if isempty - delete, if isn't, show err
 	let "counter++"
-	trash -v -F $directory 
+	#trash -v -F $directory 
 	fi
 done
 
