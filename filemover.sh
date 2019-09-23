@@ -6,12 +6,13 @@
 #delete directory (or even better, move to trash?)
 #in the end print all files (should probably be 144)
 
-mkdir ./extracted 
-#echo $(ls):
 counter=0
 directories_found=$(ls -dq *drive* | wc -l)
 echo $directories_found
-#why doesnt /~/Downloads/extracter/ work?
+
+echo "Total extractable directories found: ${directories_found}"
+
+mkdir ./extracted
 for directory in ./*
 do	
 	#echo 'outer loop'
@@ -27,6 +28,8 @@ do
 
 	#if isempty - delete, if isn't, show err
 	let "counter++"
+	difference=$((directories_found-counter))
+	echo "${difference} directories to go"
 	#trash -v -F $directory 
 	fi
 done
