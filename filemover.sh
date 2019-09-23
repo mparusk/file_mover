@@ -7,10 +7,16 @@
 #in the end print all files (should probably be 144)
 
 counter=0
-directories_found=$(ls -dq *drive* | wc -l)
-echo $directories_found
+directories_found=$(ls -d *drive*| wc -l |xargs)
 
+#Doing some dodgy stuff for better visuals
+echo "Welcome to Maria's file mover."
+echo ""
+echo ""
+
+sleep 1
 echo "Total extractable directories found: ${directories_found}"
+sleep 1
 
 mkdir ./extracted
 for directory in ./*
@@ -29,10 +35,12 @@ do
 	#if isempty - delete, if isn't, show err
 	let "counter++"
 	difference=$((directories_found-counter))
-	echo "${difference} directories to go"
+	echo "${counter} directories done, ${difference} directories to go"
+	sleep 1
 	#trash -v -F $directory 
 	fi
 done
 
-echo $counter
-echo 'finished'
+echo "Finished moving"
+sleep 1
+echo "${counter} out of ${directories_found} moved to extracted."
