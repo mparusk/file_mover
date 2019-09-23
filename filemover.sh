@@ -6,3 +6,28 @@
 #delete directory (or even better, move to trash?)
 #in the end print all files (should probably be 144)
 
+#mkdir ./extracted 
+#echo $(ls)
+counter=0
+
+#why doesnt /~/Downloads/extracter/ work?
+for directory in ./*
+do	
+	echo 'outer loop'
+	echo $directory
+	if [[ $directory =~ .*drive.* ]]
+	then
+		for file in ./$directory/*
+			do 	
+				echo $file
+				#mv file /~/Downloads/extracter
+						
+			done
+#	
+#	#if isempty - delete, if isn't, show err
+#	$counter = $counter + 1
+	fi
+done
+
+echo $counter
+echo 'finished'
