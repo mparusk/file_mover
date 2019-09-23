@@ -33,6 +33,16 @@ do
 			done
 
 	#if isempty - delete, if isn't, show err
+	(wc -l $directory/* | xargs) > error.txt
+	
+	if [ cat error.txt -eq 0 ]
+	then
+    		echo "caught"
+	fi
+
+	
+
+	
 	let "counter++"
 	difference=$((directories_found-counter))
 	echo "${counter} directories done, ${difference} directories to go"
