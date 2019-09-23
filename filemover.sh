@@ -12,8 +12,6 @@ directories_found=$(ls -d *drive*| wc -l |xargs)
 #Doing some dodgy stuff for better visuals
 echo "Welcome to Maria's file mover."
 echo ""
-echo ""
-
 sleep 1
 echo "Total extractable directories found: ${directories_found}"
 sleep 1
@@ -32,25 +30,20 @@ do
 						
 			done
 
-	#if isempty - delete, if isn't, show err
-	(wc -l $directory/* | xargs) > error.txt
-	
-	if [ cat error.txt -eq 0 ]
-	then
-    		echo "caught"
+	if [ "$(ls $directory)" ]
+	then 
+		echo "Error, not empty"
+	else
+		trash -F  $directory
+		echo "Delete successful."
 	fi
-
-	
-
-	
+		
 	let "counter++"
 	difference=$((directories_found-counter))
 	echo "${counter} directories done, ${difference} directories to go"
 	sleep 1
-	#trash -v -F $directory 
 	fi
 done
 
-echo "Finished moving"
 sleep 1
-echo "${counter} out of ${directories_found} moved to extracted."
+echo "${counter} out of ${directories_found} moved to ./ extracted."
